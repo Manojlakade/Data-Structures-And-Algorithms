@@ -1,0 +1,205 @@
+public class array{
+    public static int linear_search(int marks[],int key)
+    {
+        for (int i=0;i<=(marks.length-1);i++){
+            if(marks[i]==key){
+                return i;
+            }
+
+        }
+        return -1;
+        
+    }
+    public static int largest(int arr[]){
+        int largestt=0;
+        for(int i=0;i<=arr.length-1;i++){
+            if(arr[i]>largestt){
+                largestt=arr[i];
+            }
+        }
+        return largestt;
+    }
+    public static int binarysearch(int arr[],int key)
+    {
+        int start=0;
+        
+        int end=arr.length-1;
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            if(key==arr[mid])
+            {
+                return mid;
+            }
+            if (key<arr[mid])
+            {
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+
+        }
+
+        return -1;
+        
+    }
+    public static void reverse_array(int arr[])
+    {
+        int start=0,last=arr.length-1;
+        while(start<last){
+            int temp=arr[last];
+            arr[last]=arr[start];
+            arr[start]=temp;
+            start++;
+            last--;
+        }
+        
+    }
+    
+    public static void pairs(int arr[]) {
+    for (int i = 0; i <= arr.length - 1; i++) {
+        int cur = arr[i];
+        for (int j = i + 1; j <= arr.length - 1; j++) {
+            System.out.print("(" + cur + "," + arr[j] + ")");
+        }
+        System.out.println();
+    }
+    }
+    
+    public static void printpairs(int arr[]) {
+        for (int i = 0; i <= arr.length - 1; i++) {
+            int cur = arr[i];
+            for (int j = i + 1; j <= arr.length - 1; j++) {
+                System.out.print("(" + cur + "," + arr[j] + ")");
+            }
+            System.out.println();
+        }
+    }
+    /*public static void printsubarrays(int arrmani[]){
+        for(int i=0;i<= arrmani.length -1;i++)
+        {
+            for (int j=i;j<=arrmani.lenght-1;j++)
+            {
+                for(int k=i;k<=j;k++)
+                {
+                    System.out.print(arrmani[k] + " ");
+
+                }
+                System.out.println();
+            }
+            
+        }
+    }*/
+    public static void printsubarrays(int arr[]) {
+        
+        for (int i = 0; i <= arr.length - 1; i++) {
+            for (int j = i; j <= arr.length - 1; j++) {
+                for (int k = i; k <= j; k++) {
+                    System.out.print(arr[k] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+    public static int max_subarr(int arr[]) {
+        int maxsubarr=0;
+        for (int i = 0; i <= arr.length - 1; i++) {
+            for (int j = i; j <= arr.length - 1; j++) {
+                int cursum=0;
+                for (int k = i; k <= j; k++) {
+                    cursum=cursum+arr[k];
+                }
+                System.out.println(cursum);
+                if (cursum>maxsubarr)
+                {
+                    maxsubarr=cursum;
+                }
+               
+            }
+        }
+        return maxsubarr;
+    }
+    /*public static int max_subarr_prefix_meth(int arr[]) {
+        int maxsubarr=0;
+        int[] prefix = new int[arr.length]; 
+        prefix[0] = arr[0];
+       
+        for(int i=1;i<=arr.lenght;i++){
+            prefix[i]=prefix[i-1]+arr[i];
+        }
+        for (int i = 0; i <= arr.length ; i++) {
+            int cursum=0;
+            for (int j = i; j <= arr.length ; j++) {
+                
+                cursum=i==0?prefix[j]:prefix[j]-prefix[i-1];
+                
+            }
+            System.out.println(cursum);
+            if (cursum>maxsubarr)
+            {
+                maxsubarr=cursum;
+            }
+            
+            }
+        }
+        return maxsubarr;
+    }*/
+
+    public static int max_subarr_prefix_meth(int arr[]) {
+    int maxsubarr = Integer.MIN_VALUE; // Initialize with the smallest possible integer value
+    int[] prefix = new int[arr.length];
+    prefix[0] = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+        prefix[i] = prefix[i - 1] + arr[i];
+    }
+    for (int i = 0; i < arr.length; i++) {
+        for (int j = i; j < arr.length; j++) {
+            int cursum = (i == 0) ? prefix[j] : prefix[j] - prefix[i - 1];
+            if (cursum > maxsubarr) {
+                maxsubarr = cursum;
+            }
+        }
+    }
+    return maxsubarr;
+    }
+
+
+
+    public static void main(String args[]){
+        /*
+        int marks[]={2,4,0,8,10,12,14,16};
+        int key=110;
+        if(linear_search(marks,key)==-1){
+            System.out.println("key not found");
+        }
+        else{
+            System.out.println(linear_search(marks,key));
+        }
+        
+        int marks[]={2,4,0,8,10,12,14,16};
+        System.out.print(largest(marks)); 
+        
+        int marks[]={2,4,0,8,10,12,14,16};
+        int key=10;
+        System.out.println(binarysearch(marks,key));
+        
+        int marks[]={2,4,0,8,10,12,14,16};
+        reverse_array(marks);
+        for(int i=0;i<=marks.length-1;i++){
+            System.out.print(marks[i]+" ");
+        }
+        
+       int marks[]={2,4,0,8,10,12,14,16};
+       printsubarrays(marks);
+
+       int marks[]={2,4,6,8,10};
+       System.out.println(max_subarr(marks));*/
+
+
+       int marks[]={2,4,6,8,10};
+       System.out.println(max_subarr_prefix_meth(marks));
+
+
+    }
+}
